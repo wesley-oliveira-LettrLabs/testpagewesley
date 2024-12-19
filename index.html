@@ -11,6 +11,34 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-5GGGSZSJ');</script>
     <!-- End Google Tag Manager -->
+
+      <script>
+    (async function () {
+      // Verifica se a rota é /testscript
+      if (window.location.pathname === '/checkscript') {
+        try {
+          // Faz uma requisição para buscar o HTML do site alvo
+          const siteUrl = 'https://example.com'; // Substitua pelo URL do site a verificar
+          const response = await fetch(siteUrl);
+          const html = await response.text();
+
+          // Procura a tag GTM no HTML
+          const gtmMatch = html.match(/GTM-[a-zA-Z0-9]+/); // Procura por algo como "GTM-XXXXXX"
+
+          // Define o valor encontrado ou null
+          const gtmValue = gtmMatch ? gtmMatch[0] : null;
+
+          // Redireciona para o link com o valor da tag GTM ou null
+          const redirectUrl = `https://lettrlabs.com/checkscript?gtm=${gtmValue}`;
+          window.location.href = redirectUrl;
+        } catch (error) {
+          console.error('Erro ao buscar a tag GTM:', error);
+          // Em caso de erro, redireciona com valor null
+          window.location.href = 'https://lettrlabs.com/checkscript?gtm=null';
+        }
+      }
+    })();
+  </script>
 </head>
 <body>
     <h1>Bem-vindo à minha página!</h1>
